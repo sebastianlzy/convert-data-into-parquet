@@ -7,7 +7,7 @@ FROM python:latest
 WORKDIR /
 
 #to COPY the remote file at working directory in container
-COPY ./hello_world/requirements.txt ./hello_world/requirements.txt
+COPY ./app/requirements.txt ./app/requirements.txt
 COPY ./env.sh ./env.sh
 # Now the structure looks like this '/usr/app/src/test.py'
 
@@ -15,6 +15,6 @@ COPY ./env.sh ./env.sh
 #CMD instruction should be used to run the software
 #contained by your image, along with any arguments.
 
-RUN ["pip", "install","-r", "./hello_world/requirements.txt"]
+RUN ["pip", "install","-r", "./app/requirements.txt"]
 #CMD ["ls"]
-CMD ["/bin/bash", "-c", "source ./env.sh && python -m hello_world.app"]
+CMD ["/bin/bash", "-c", "source ./env.sh && python -m app.main"]
