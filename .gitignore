@@ -4,6 +4,7 @@
 env.sh
 .idea
 .aws-sam/build.toml
+.aws-sam/deps/*
 
 ### Linux ###
 *~
