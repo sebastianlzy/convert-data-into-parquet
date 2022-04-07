@@ -5,6 +5,7 @@ env.sh
 .idea
 .aws-sam/build.toml
 .aws-sam/deps/*
+convert-data-into-parquet.iml
 
 ### Linux ###
 *~

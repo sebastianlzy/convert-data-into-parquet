@@ -17,4 +17,6 @@ COPY ./env.sh ./env.sh
 
 RUN ["pip", "install","-r", "./app/requirements.txt"]
 #CMD ["ls"]
-CMD ["/bin/bash", "-c", "source ./env.sh && python -m app.main"]
+#CMD ["/bin/bash", "-c", "source ./env.sh && python -m app.main"]
+#CMD ["/bin/bash", "-c", "source ./env.sh && python -m app.load_to_dynamoDB"]
+CMD ["/bin/bash", "-c", "source ./env.sh && python -m app.read_from_dynamoDB"]

@@ -63,3 +63,91 @@ Data set: https://us-east-1.console.aws.amazon.com/s3/buckets/amazon-reviews-pds
 2. https://docs.aws.amazon.com/athena/latest/ug/partitions.html
 3. https://docs.aws.amazon.com/AmazonS3/latest/userguide/optimizing-performance.html
 4. https://aws.amazon.com/premiumsupport/knowledge-center/athena-create-use-partitioned-tables/
+
+# FAQ
+
+## How to convert deserialize Dynamodb object to JSON?
+DynamoDB object
+```
+{
+    "total_votes": {
+        "N": "0"
+    },
+    "product_title": {
+        "S": "Sony TDG-500P Passive 3D Glasses"
+    },
+    "star_rating": {
+        "N": "1"
+    },
+    "customer_id": {
+        "N": "27627839"
+    },
+    "marketplace": {
+        "S": "US"
+    },
+    "helpful_votes": {
+        "N": "0"
+    },
+    "review_headline": {
+        "S": "One Star"
+    },
+    "review_id": {
+        "S": "RS7RLMV1GPEHA"
+    },
+    "review_date": {
+        "S": "2015-08-31"
+    },
+    "product_id": {
+        "S": "B00C7O0YEY"
+    },
+    "review_body": {
+        "S": "They did not work with my Sony TV"
+    },
+    "product_category": {
+        "S": "Electronics"
+    },
+    "year": {
+        "N": "2015"
+    },
+    "verfied_purchase": {
+        "S": "Y"
+    },
+    "product_parent": {
+        "N": "169087862"
+    }
+}
+
+```
+
+Code
+```
+def lambda_handler(event, context):
+    records = read_from_dynamodb()
+    print(json.dumps(records["Item"], indent=4))
+
+    amazon_review = ddb_deserialize(records["Item"])
+    print(json.dumps(amazon_review, cls=DecimalEncoder, indent=4))
+    return {'statusCode': 200}
+```
+
+JSON
+```
+{
+    "total_votes": "0",
+    "product_title": "Sony TDG-500P Passive 3D Glasses",
+    "star_rating": "1",
+    "customer_id": "27627839",
+    "marketplace": "US",
+    "helpful_votes": "0",
+    "review_headline": "One Star",
+    "review_id": "RS7RLMV1GPEHA",
+    "review_date": "2015-08-31",
+    "product_id": "B00C7O0YEY",
+    "review_body": "They did not work with my Sony TV",
+    "product_category": "Electronics",
+    "year": "2015",
+    "verfied_purchase": "Y",
+    "product_parent": "169087862"
+}
+
+```
