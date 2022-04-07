@@ -67,8 +67,12 @@ Data set: https://us-east-1.console.aws.amazon.com/s3/buckets/amazon-reviews-pds
 # FAQ
 
 ## How to convert deserialize Dynamodb object to JSON?
-DynamoDB object
-```
+
+https://github.com/sebastianlzy/convert-data-into-parquet/blob/master/app/load_to_dynamoDB.py
+
+<details>
+<summary>DynamoDB object</summary>
+```json
 {
     "total_votes": {
         "N": "0"
@@ -116,11 +120,11 @@ DynamoDB object
         "N": "169087862"
     }
 }
-
 ```
+</details>
 
 Code
-```
+```python
 def lambda_handler(event, context):
     records = read_from_dynamodb()
     print(json.dumps(records["Item"], indent=4))
@@ -130,8 +134,9 @@ def lambda_handler(event, context):
     return {'statusCode': 200}
 ```
 
-JSON
-```
+<details>
+<summary>JSON</summary>
+```json
 {
     "total_votes": "0",
     "product_title": "Sony TDG-500P Passive 3D Glasses",
@@ -149,5 +154,20 @@ JSON
     "verfied_purchase": "Y",
     "product_parent": "169087862"
 }
+```
+</details>
+
+## How to load data to Kinesis firehose?
+
+https://github.com/sebastianlzy/convert-data-into-parquet/blob/master/app/put_record_into_firehose.py
+
+```shell
+ response = client.put_record(
+        DeliveryStreamName=DELIVERY_STREAM_NAME,
+        Record={
+            'Data': convert_to_byte(str(get_data()))
+        }
+    )
+    print(response)
 
 ```
