@@ -70,8 +70,7 @@ Data set: https://us-east-1.console.aws.amazon.com/s3/buckets/amazon-reviews-pds
 
 https://github.com/sebastianlzy/convert-data-into-parquet/blob/master/app/load_to_dynamoDB.py
 
-<details>
-<summary>DynamoDB object</summary>
+DynamoDB object
 ```json
 {
     "total_votes": {
@@ -121,7 +120,6 @@ https://github.com/sebastianlzy/convert-data-into-parquet/blob/master/app/load_t
     }
 }
 ```
-</details>
 
 Code
 ```python
@@ -134,8 +132,7 @@ def lambda_handler(event, context):
     return {'statusCode': 200}
 ```
 
-<details>
-<summary>JSON</summary>
+JSON
 ```json
 {
     "total_votes": "0",
@@ -155,7 +152,6 @@ def lambda_handler(event, context):
     "product_parent": "169087862"
 }
 ```
-</details>
 
 ## How to load data to Kinesis firehose?
 
